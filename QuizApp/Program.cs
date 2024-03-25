@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Context;
 using QuizApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+
+// Register DbContext
+var connectionString = builder.Configuration.GetConnectionString("QuizAppDB");
+builder.Services.AddDbContext<QuizAppDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
