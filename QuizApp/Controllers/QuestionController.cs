@@ -16,7 +16,7 @@ public class QuestionController : Controller
     [HttpGet]
     public IActionResult GetQuestions()
     {
-        return View("QuestionsList", _questionRepository.GetQuestions());
+        return View(_questionRepository.GetQuestions());
     }
 
     [HttpPost]

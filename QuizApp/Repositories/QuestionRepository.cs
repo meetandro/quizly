@@ -15,7 +15,9 @@ public class QuestionRepository : IQuestionRepository
 
     public List<Question> GetQuestions()
     {
-        return _context.Questions.Include("Answers").ToList();
+        return _context.Questions
+            .Include("Answers")
+            .ToList();
     }
 
     public Question AddQuestion(Question question, int correctAnswerIndex)
