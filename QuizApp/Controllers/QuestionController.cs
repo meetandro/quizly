@@ -1,28 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApp.Models;
-using QuizApp.Services;
+using QuizApp.Repositories;
 
 namespace QuizApp.Controllers;
 
 public class QuestionController : Controller
 {
-    private readonly IQuestionService _questionService;
+    private readonly IQuestionRepository _questionRepository;
 
-    public QuestionController(IQuestionService questionService)
+    public QuestionController(IQuestionRepository questionRepository)
     {
-        _questionService = questionService;
+        _questionRepository = questionRepository;
     }
 
     [HttpGet]
     public IActionResult GetQuestions()
     {
-        return View("QuestionsList", _questionService.GetQuestions());
+        return View("QuestionsList", _questionRepository.GetQuestions());
     }
 
     [HttpPost]
     public IActionResult AddQuestion(Question question, int correctAnswerIndex)
     {
-        _questionService.AddQuestion(question, correctAnswerIndex);
+        _questionRepository.AddQuestion(question, correctAnswerIndex);
         return RedirectToAction();
     }
 
@@ -34,7 +34,7 @@ public class QuestionController : Controller
     [HttpPost]
     public IActionResult DeleteQuestion(int id)
     {
-        _questionService.DeleteQuestion(id);
+        _questionRepository.DeleteQuestion(id);
         return RedirectToAction("GetQuestions");
     }
 }
