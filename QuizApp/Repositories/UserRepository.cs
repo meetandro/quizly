@@ -45,7 +45,6 @@ public class UserRepository : IUserRepository
             AnswerId = answerId,
             IsCorrect = answer.IsCorrect
         };
-
         _context.SubmittedAnswers.Add(submittedAnswer);
         _context.SaveChanges();
         return submittedAnswer;
