@@ -7,130 +7,182 @@ using QuizApp.Context;
 
 #nullable disable
 
-namespace QuizApp.Migrations
+namespace QuizApp.Migrations;
+
+[DbContext(typeof(QuizAppDbContext))]
+partial class QuizAppDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(QuizAppDbContext))]
-    partial class QuizAppDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "8.0.3")
+            .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+        SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("QuizApp.Models.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AnswerText")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("AnswerText")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsCorrect")
+                    .HasColumnType("bit");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
+                b.Property<int>("QuestionId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
+                b.HasIndex("QuestionId");
 
-                    b.ToTable("Answers");
-                });
+                b.ToTable("Answers");
+            });
 
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("QuizApp.Models.Attempt", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("QuestionText")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<int>("AnswerId")
+                    .HasColumnType("int");
 
-                    b.HasKey("Id");
+                b.Property<bool>("IsCorrect")
+                    .HasColumnType("bit");
 
-                    b.ToTable("Questions");
-                });
+                b.Property<int>("RoundId")
+                    .HasColumnType("int");
 
-            modelBuilder.Entity("QuizApp.Models.SubmittedAnswer", b =>
-                {
-                    b.Property<int>("AnswerId")
-                        .HasColumnType("int");
+                b.HasKey("Id");
 
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
+                b.HasIndex("AnswerId");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                b.HasIndex("RoundId");
 
-                    b.HasIndex("AnswerId");
+                b.ToTable("Attempts");
+            });
 
-                    b.HasIndex("UserId");
+        modelBuilder.Entity("QuizApp.Models.Player", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.ToTable("SubmittedAnswers");
-                });
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-            modelBuilder.Entity("QuizApp.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                b.Property<int>("HighScore")
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<string>("Username")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
+                b.Property<int>("WinCount")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                b.HasKey("Id");
 
-                    b.HasKey("Id");
+                b.ToTable("Players");
+            });
 
-                    b.ToTable("Users");
-                });
+        modelBuilder.Entity("QuizApp.Models.Question", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-            modelBuilder.Entity("QuizApp.Models.Answer", b =>
-                {
-                    b.HasOne("QuizApp.Models.Question", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-            modelBuilder.Entity("QuizApp.Models.SubmittedAnswer", b =>
-                {
-                    b.HasOne("QuizApp.Models.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Property<string>("QuestionText")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasOne("QuizApp.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasKey("Id");
 
-                    b.Navigation("Answer");
+                b.ToTable("Questions");
+            });
 
-                    b.Navigation("User");
-                });
+        modelBuilder.Entity("QuizApp.Models.Round", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
-                {
-                    b.Navigation("Answers");
-                });
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<bool>("IsWon")
+                    .HasColumnType("bit");
+
+                b.Property<int>("PlayerId")
+                    .HasColumnType("int");
+
+                b.HasKey("Id");
+
+                b.HasIndex("PlayerId");
+
+                b.ToTable("Rounds");
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            {
+                b.HasOne("QuizApp.Models.Question", null)
+                    .WithMany("Answers")
+                    .HasForeignKey("QuestionId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Attempt", b =>
+            {
+                b.HasOne("QuizApp.Models.Answer", null)
+                    .WithMany("Attempts")
+                    .HasForeignKey("AnswerId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("QuizApp.Models.Round", null)
+                    .WithMany("Attempts")
+                    .HasForeignKey("RoundId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Round", b =>
+            {
+                b.HasOne("QuizApp.Models.Player", null)
+                    .WithMany("Rounds")
+                    .HasForeignKey("PlayerId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            {
+                b.Navigation("Attempts");
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Player", b =>
+            {
+                b.Navigation("Rounds");
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Question", b =>
+            {
+                b.Navigation("Answers");
+            });
+
+        modelBuilder.Entity("QuizApp.Models.Round", b =>
+            {
+                b.Navigation("Attempts");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

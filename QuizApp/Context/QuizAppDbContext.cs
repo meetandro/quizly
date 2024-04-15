@@ -3,12 +3,11 @@ using QuizApp.Models;
 
 namespace QuizApp.Context;
 
-public class QuizAppDbContext : DbContext
+public class QuizAppDbContext(DbContextOptions<QuizAppDbContext> options) : DbContext(options)
 {
-    public QuizAppDbContext(DbContextOptions<QuizAppDbContext> options) : base(options) { }
-
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
-    public DbSet<User> Users { get; set; }
-    public DbSet<SubmittedAnswer> SubmittedAnswers { get; set; }
+    public DbSet<Player> Players { get; set; }
+    public DbSet<Round> Rounds { get; set; }
+    public DbSet<Attempt> Attempts { get; set; }
 }

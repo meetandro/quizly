@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 
 // Register DbContext
 var connectionString = builder.Configuration.GetConnectionString("QuizAppDB");
