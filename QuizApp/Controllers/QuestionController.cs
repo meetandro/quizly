@@ -4,14 +4,9 @@ using QuizApp.Repositories;
 
 namespace QuizApp.Controllers;
 
-public class QuestionController : Controller
+public class QuestionController(IQuestionRepository questionRepository) : Controller
 {
-    private readonly IQuestionRepository _questionRepository;
-
-    public QuestionController(IQuestionRepository questionRepository)
-    {
-        _questionRepository = questionRepository;
-    }
+    private readonly IQuestionRepository _questionRepository = questionRepository;
 
     [HttpGet]
     public IActionResult GetQuestions()

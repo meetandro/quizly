@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Players";
+}
+@model List<Player>
+
+<div class="container">
+    <div class="col-md-15">
+        <h2 class="mb-4">Players</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>Win Count</th>
+                    <th>High Score</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1) (Id : @Model[i].Id)</td>
+                        <td>@Model[i].Username</td>
+                        <td>@Model[i].WinCount</td>
+                        <td>@Model[i].HighScore</td>
+                        <td style="width: 50%;">
+                            <form asp-controller="Player" asp-action="DeletePlayer" method="post">
+                                <input type="hidden" name="id" value="@Model[i].Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

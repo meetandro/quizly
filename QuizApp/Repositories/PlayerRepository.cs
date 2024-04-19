@@ -3,14 +3,9 @@ using QuizApp.Models;
 
 namespace QuizApp.Repositories;
 
-public class PlayerRepository : IPlayerRepository
+public class PlayerRepository(QuizAppDbContext context) : IPlayerRepository
 {
-    private readonly QuizAppDbContext _context;
-
-    public PlayerRepository(QuizAppDbContext context)
-    {
-        _context = context;
-    }
+    private readonly QuizAppDbContext _context = context;
 
     public List<Player> GetPlayers()
     {

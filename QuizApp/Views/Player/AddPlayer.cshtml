@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Add Player";
+}
+
+<div class="container">
+    <div class="col-md-15">
+        <div class="player-container">
+            <h2 class="mb-4">Add Player</h2>
+            <form asp-controller="Player" asp-action="AddPlayer" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="Username" class="form-control mb-3" />
+                </div>
+                <button type="submit" class="btn btn-primary">Add Player</button>
+            </form>
+        </div>
+    </div>
+</div>

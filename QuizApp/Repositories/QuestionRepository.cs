@@ -4,14 +4,9 @@ using QuizApp.Models;
 
 namespace QuizApp.Repositories;
 
-public class QuestionRepository : IQuestionRepository
+public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
 {
-    private readonly QuizAppDbContext _context;
-
-    public QuestionRepository(QuizAppDbContext context)
-    {
-        _context = context;
-    }
+    private readonly QuizAppDbContext _context = context;
 
     public List<Question> GetQuestions()
     {
