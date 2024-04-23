@@ -1,11 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Result";
 }
-@model Player
+@model ResultModel
 
 <div class="container mt-5">
-    <h2>Welcome!</h2>
     <div class="container">
-        <h1>@(Model.Username)</h1>
+        <h1>@(Model.PlayerUsername), you got a score of @(Model.Score)</h1>
+
+        @if (Model.IsWon)
+        {
+            <h1>Well done!</h1>
+        }
+        else
+        {
+            <h1>Try again?</h1>
+        }
+
+        <form asp-controller="Game" asp-action="StartQuiz" method="get">
+            <button type="submit" class="btn btn-success">Restart Quiz</button>
+        </form>
     </div>
 </div>

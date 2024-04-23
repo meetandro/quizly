@@ -8,7 +8,7 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
     private readonly IPlayerRepository _playerRepository = playerRepository;
     private readonly IQuestionRepository _questionRepository = questionRepository;
 
-    public Player SubmitQuiz(SubmitModel submitModel)
+    public ResultModel SubmitQuiz(SubmitModel submitModel)
     {
         var player = _playerRepository.GetPlayerByUsername(submitModel.PlayerUsername);
 
@@ -34,12 +34,19 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
             player.WinCount++;
         }
 
-        player.HighScore = Math.Max(player.HighScore, (int)scorePercentage);
+        player.HighScore = Math.Max(player.HighScore, scorePercentage);
 
         player.Rounds.Add(round);
 
         player = _playerRepository.UpdatePlayer(player);
 
-        return player;
+        var resultModel = new ResultModel
+        {
+            PlayerUsername = player.Username,
+            IsWon = round.IsWon,
+            Score = scorePercentage
+        };
+
+        return resultModel;
     }
 }

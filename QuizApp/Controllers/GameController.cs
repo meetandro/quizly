@@ -19,7 +19,7 @@ public class GameController(IGameService gameService, IQuestionRepository questi
     [HttpPost]
     public IActionResult SubmitQuiz(SubmitModel submitModel)
     {
-        var player = _gameService.SubmitQuiz(submitModel);
-        return View("Result", player);
+        var resultModel = _gameService.SubmitQuiz(submitModel);
+        return View("Result", resultModel);
     }
 }
