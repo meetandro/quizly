@@ -1,13 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Result";
 }
-@model List<Question>
+@model Player
 
 <div class="container mt-5">
     <h2>Welcome!</h2>
     <div class="container">
-        <form asp-controller="Game" asp-action="StartQuiz" method="get">
-            <button type="submit" class="btn btn-success">Start Quizა</button>
-        </form>
+        <h1>@(Model.Username)</h1>
     </div>
 </div>

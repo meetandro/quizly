@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizApp.Models;
 using QuizApp.Repositories;
 using QuizApp.Services;
 
@@ -16,8 +17,9 @@ public class GameController(IGameService gameService, IQuestionRepository questi
     }
 
     [HttpPost]
-    public IActionResult SubmitQuiz()
+    public IActionResult SubmitQuiz(SubmitModel submitModel)
     {
-        return RedirectToAction("StartQuiz");
+        var player = _gameService.SubmitQuiz(submitModel);
+        return View("Result", player);
     }
 }

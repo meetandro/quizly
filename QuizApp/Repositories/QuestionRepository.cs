@@ -15,6 +15,20 @@ public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
             .ToList();
     }
 
+    public Question GetQuestionById(int id)
+    {
+        return _context.Questions
+            .Include("Answers")
+            .FirstOrDefault(q => q.Id == id);
+    }
+
+    public List<Answer> GetAnswersByIds(List<int> ids)
+    {
+        return _context.Answers
+            .Where(a => ids.Contains(a.Id))
+            .ToList();
+    }
+
     public Question AddQuestion(Question question, int correctAnswerIndex)
     {
         question.Answers[correctAnswerIndex].IsCorrect = true;
