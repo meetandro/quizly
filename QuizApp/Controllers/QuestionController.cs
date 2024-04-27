@@ -17,7 +17,17 @@ public class QuestionController(IQuestionRepository questionRepository) : Contro
     [HttpPost]
     public IActionResult AddQuestion(Question question, int correctAnswerIndex)
     {
-        _questionRepository.AddQuestion(question, correctAnswerIndex);
+        if (string.IsNullOrEmpty(question.QuestionText))
+        {
+            return RedirectToAction("Error", "Home", new { message = "Question text is required." });
+        }
+        if (question.Answers.Any(a => string.IsNullOrEmpty(a.AnswerText)))
+        {
+            return RedirectToAction("Error", "Home", new { message = "All answers must be filled." });
+        }
+
+        question.Answers[correctAnswerIndex].IsCorrect = true;
+        _questionRepository.AddQuestion(question);
         return RedirectToAction();
     }
 

@@ -14,14 +14,14 @@ public class PlayerRepository(QuizAppDbContext context) : IPlayerRepository
             .ToList();
     }
 
-    public Player GetPlayerById(int id)
+    public Player? GetPlayerById(int id)
     {
         return _context.Players
             .Include("Rounds")
             .FirstOrDefault(p => p.Id == id);
     }
 
-    public Player GetPlayerByUsername(string username)
+    public Player? GetPlayerByUsername(string username)
     {
         return _context.Players
             .Include("Rounds")

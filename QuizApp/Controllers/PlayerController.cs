@@ -17,6 +17,15 @@ public class PlayerController(IPlayerRepository playerRepository) : Controller
     [HttpPost]
     public IActionResult AddPlayer(Player player)
     {
+        if (string.IsNullOrEmpty(player.Username))
+        {
+            return RedirectToAction("Error", "Home", new { message = "Name is required." });
+        }
+        if (_playerRepository.GetPlayerByUsername(player.Username) is not null)
+        {
+            return RedirectToAction("Error", "Home", new { message = "Player with name already exists." });
+        }
+
         _playerRepository.AddPlayer(player);
         return RedirectToAction();
     }

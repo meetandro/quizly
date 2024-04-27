@@ -15,7 +15,7 @@ public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
             .ToList();
     }
 
-    public Question GetQuestionById(int id)
+    public Question? GetQuestionById(int id)
     {
         return _context.Questions
             .Include("Answers")
@@ -29,9 +29,8 @@ public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
             .ToList();
     }
 
-    public Question AddQuestion(Question question, int correctAnswerIndex)
+    public Question AddQuestion(Question question)
     {
-        question.Answers[correctAnswerIndex].IsCorrect = true;
         _context.Questions.Add(question);
         _context.SaveChanges();
         return question;

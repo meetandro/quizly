@@ -19,6 +19,11 @@ public class GameController(IGameService gameService, IQuestionRepository questi
     [HttpPost]
     public IActionResult SubmitQuiz(SubmitModel submitModel)
     {
+        if (string.IsNullOrEmpty(submitModel.PlayerUsername))
+        {
+            return RedirectToAction("Error", "Home", new { message = "Name is required." });
+        }
+
         var resultModel = _gameService.SubmitQuiz(submitModel);
         return View("Result", resultModel);
     }
