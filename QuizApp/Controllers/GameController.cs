@@ -24,7 +24,15 @@ public class GameController(IGameService gameService, IQuestionRepository questi
             return RedirectToAction("Error", "Home", new { message = "Name is required." });
         }
 
-        var resultModel = _gameService.SubmitQuiz(submitModel);
-        return View("Result", resultModel);
+        try
+        {
+            var resultModel = _gameService.SubmitQuiz(submitModel);
+            return View("Result", resultModel);
+        }
+        catch (Exception ex)
+        {
+
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
     }
 }

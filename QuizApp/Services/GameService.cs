@@ -10,7 +10,7 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
 
     public ResultModel SubmitQuiz(SubmitModel submitModel)
     {
-        var player = _playerRepository.GetPlayerByUsername(submitModel.PlayerUsername);
+        var player = _playerRepository.GetPlayerByUsername(submitModel.PlayerUsername) ?? throw new Exception($"Player {submitModel.PlayerUsername} does not exist");
 
         var answers = _questionRepository.GetAnswersByIds(submitModel.SelectedAnswerIds);
 
