@@ -29,9 +29,8 @@ public class GameController(IGameService gameService, IQuestionRepository questi
             var resultModel = _gameService.SubmitQuiz(submitModel);
             return View("Result", resultModel);
         }
-        catch (Exception ex)
+        catch (ArgumentNullException ex)
         {
-
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
     }
