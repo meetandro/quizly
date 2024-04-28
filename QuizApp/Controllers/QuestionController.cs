@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizApp.Exceptions;
 using QuizApp.Models;
 using QuizApp.Services;
 
@@ -14,6 +15,11 @@ public class QuestionController(IQuestionService questionService) : Controller
         return View(_questionService.GetQuestions());
     }
 
+    public IActionResult AddQuestion()
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult AddQuestion(QuestionViewModel questionViewModel)
     {
@@ -22,7 +28,11 @@ public class QuestionController(IQuestionService questionService) : Controller
             _questionService.AddQuestion(questionViewModel);
             return RedirectToAction();
         }
-        catch (ArgumentNullException ex)
+        catch (EntityNotFoundException ex)
+        {
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
+        catch (EmptyInputException ex)
         {
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
@@ -30,11 +40,6 @@ public class QuestionController(IQuestionService questionService) : Controller
         {
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
-    }
-
-    public IActionResult AddQuestion()
-    {
-        return View();
     }
 
     [HttpPost]

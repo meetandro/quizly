@@ -1,4 +1,5 @@
 ﻿using QuizApp.Entities;
+using QuizApp.Exceptions;
 using QuizApp.Models;
 using QuizApp.Repositories;
 
@@ -15,19 +16,18 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
 
     public Question AddQuestion(QuestionViewModel questionViewModel)
     {
-        var question = questionViewModel.Question ?? throw new Exception("Question does not exist.");
+        var question = questionViewModel.Question ?? throw new EntityNotFoundException("Question does not exist.");
 
         if (string.IsNullOrEmpty(question.QuestionText))
         {
-            throw new ArgumentNullException(nameof(questionViewModel), "Question text is required.");
+            throw new EmptyInputException("Question text is required.");
         }
         if (question.Answers.Any(a => string.IsNullOrEmpty(a.AnswerText)))
         {
-            throw new Exception("All answers must be filled.");
+            throw new EmptyInputException("All answers must be filled.");
         }
 
-        var correctAnswerIndex = questionViewModel.CorrectAnswerIndex;
-
+        int correctAnswerIndex = questionViewModel.CorrectAnswerIndex;
         question.Answers[correctAnswerIndex].IsCorrect = true;
 
         return _questionRepository.AddQuestion(question);

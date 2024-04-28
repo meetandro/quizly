@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApp.Entities;
+using QuizApp.Exceptions;
 using QuizApp.Services;
 
 namespace QuizApp.Controllers;
@@ -14,6 +15,11 @@ public class PlayerController(IPlayerService playerService) : Controller
         return View(_playerService.GetPlayers());
     }
 
+    public IActionResult AddPlayer()
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult AddPlayer(Player player)
     {
@@ -22,7 +28,11 @@ public class PlayerController(IPlayerService playerService) : Controller
             _playerService.AddPlayer(player);
             return RedirectToAction();
         }
-        catch (ArgumentNullException ex)
+        catch (EmptyInputException ex)
+        {
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
+        catch (EntityAlreadyExistsException ex)
         {
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
@@ -30,11 +40,6 @@ public class PlayerController(IPlayerService playerService) : Controller
         {
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
-    }
-
-    public IActionResult AddPlayer()
-    {
-        return View();
     }
 
     [HttpPost]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizApp.Exceptions;
 using QuizApp.Models;
 using QuizApp.Services;
 
@@ -23,7 +24,11 @@ public class GameController(IGameService gameService, IQuestionService questionS
             var resultViewModel = _gameService.SubmitQuiz(submitViewModel);
             return View("Result", resultViewModel);
         }
-        catch (ArgumentNullException ex)
+        catch (EmptyInputException ex)
+        {
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
+        catch (EntityNotFoundException ex)
         {
             return RedirectToAction("Error", "Home", new { message = ex.Message });
         }

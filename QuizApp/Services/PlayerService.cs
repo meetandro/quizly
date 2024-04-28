@@ -1,4 +1,5 @@
 ﻿using QuizApp.Entities;
+using QuizApp.Exceptions;
 using QuizApp.Repositories;
 
 namespace QuizApp.Services;
@@ -16,11 +17,11 @@ public class PlayerService(IPlayerRepository playerRepository) : IPlayerService
     {
         if (string.IsNullOrEmpty(player.Username))
         {
-            throw new ArgumentNullException(nameof(player), "Username is required.");
+            throw new EmptyInputException("Username is required.");
         }
         if (_playerRepository.GetPlayerByUsername(player.Username) is not null)
         {
-            throw new Exception("Player with name already exists.");
+            throw new EntityAlreadyExistsException($"Player '{player.Username}' already exists.");
         }
 
         return _playerRepository.AddPlayer(player);

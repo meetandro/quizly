@@ -5,7 +5,7 @@
 
 <div class="container mt-5">
     <div class="container">
-        <h1>@(Model.PlayerUsername), you got a score of @(Model.Score)</h1>
+        <h1>@(Model.PlayerUsername), you got @(Model.CorrectAnswersCount) out of @(Model.QuestionsCount) questions correct (@(Model.Score)%)</h1>
 
         @if (Model.IsWon)
         {

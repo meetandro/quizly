@@ -1,4 +1,5 @@
 ﻿using QuizApp.Entities;
+using QuizApp.Exceptions;
 using QuizApp.Models;
 using QuizApp.Repositories;
 
@@ -13,15 +14,13 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
     {
         if (string.IsNullOrEmpty(submitViewModel.PlayerUsername))
         {
-            throw new ArgumentNullException(nameof(submitViewModel), "Username is required.");
+            throw new EmptyInputException("Username is required.");
         }
 
-        var player = _playerRepository.GetPlayerByUsername(submitViewModel.PlayerUsername) ?? throw new Exception($"Player {submitViewModel.PlayerUsername} does not exist");
-
+        var player = _playerRepository.GetPlayerByUsername(submitViewModel.PlayerUsername) ?? throw new EntityNotFoundException($"Player '{submitViewModel.PlayerUsername}' does not exist");
         var answers = _questionRepository.GetAnswersByIds(submitViewModel.SelectedAnswerIds);
 
         var round = new Round();
-
         round.Attempts.AddRange(answers.Select(answer => new Attempt
         {
             IsCorrect = answer.IsCorrect,
@@ -29,30 +28,27 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
         }));
 
         int correctAnswersCount = answers.Count(answer => answer.IsCorrect);
-
         int questionsCount = _questionRepository.GetQuestions().Count;
 
-        int scorePercentage = questionsCount == 0 ? 0 : correctAnswersCount * 100 / questionsCount;
-
-        if (scorePercentage >= 75)
+        int score = questionsCount == 0 ? 0 : correctAnswersCount * 100 / questionsCount;
+        if (score >= 75)
         {
             round.IsWon = true;
             player.WinCount++;
         }
 
-        player.HighScore = Math.Max(player.HighScore, scorePercentage);
-
+        player.HighScore = Math.Max(player.HighScore, score);
         player.Rounds.Add(round);
-
         player = _playerRepository.UpdatePlayer(player);
 
-        var resultModel = new ResultViewModel
+        var resultViewModel = new ResultViewModel
         {
             PlayerUsername = player.Username,
             IsWon = round.IsWon,
-            Score = scorePercentage
+            QuestionsCount = questionsCount,
+            CorrectAnswersCount = correctAnswersCount,
+            Score = score
         };
-
-        return resultModel;
+        return resultViewModel;
     }
 }
