@@ -1,34 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApp.Models;
-using QuizApp.Repositories;
+using QuizApp.Services;
 
 namespace QuizApp.Controllers;
 
-public class QuestionController(IQuestionRepository questionRepository) : Controller
+public class QuestionController(IQuestionService questionService) : Controller
 {
-    private readonly IQuestionRepository _questionRepository = questionRepository;
+    private readonly IQuestionService _questionService = questionService;
 
     [HttpGet]
     public IActionResult GetQuestions()
     {
-        return View(_questionRepository.GetQuestions());
+        return View(_questionService.GetQuestions());
     }
 
     [HttpPost]
-    public IActionResult AddQuestion(Question question, int correctAnswerIndex)
+    public IActionResult AddQuestion(QuestionViewModel questionViewModel)
     {
-        if (string.IsNullOrEmpty(question.QuestionText))
+        try
         {
-            return RedirectToAction("Error", "Home", new { message = "Question text is required." });
+            _questionService.AddQuestion(questionViewModel);
+            return RedirectToAction();
         }
-        if (question.Answers.Any(a => string.IsNullOrEmpty(a.AnswerText)))
+        catch (ArgumentNullException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = "All answers must be filled." });
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
-
-        question.Answers[correctAnswerIndex].IsCorrect = true;
-        _questionRepository.AddQuestion(question);
-        return RedirectToAction();
+        catch (Exception ex)
+        {
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
     }
 
     public IActionResult AddQuestion()
@@ -39,7 +40,7 @@ public class QuestionController(IQuestionRepository questionRepository) : Contro
     [HttpPost]
     public IActionResult DeleteQuestion(int id)
     {
-        _questionRepository.DeleteQuestion(id);
+        _questionService.DeleteQuestion(id);
         return RedirectToAction("GetQuestions");
     }
 }

@@ -1,33 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuizApp.Models;
-using QuizApp.Repositories;
+using QuizApp.Entities;
+using QuizApp.Services;
 
 namespace QuizApp.Controllers;
 
-public class PlayerController(IPlayerRepository playerRepository) : Controller
+public class PlayerController(IPlayerService playerService) : Controller
 {
-    private readonly IPlayerRepository _playerRepository = playerRepository;
+    private readonly IPlayerService _playerService = playerService;
 
     [HttpGet]
     public IActionResult GetPlayers()
     {
-        return View(_playerRepository.GetPlayers());
+        return View(_playerService.GetPlayers());
     }
 
     [HttpPost]
     public IActionResult AddPlayer(Player player)
     {
-        if (string.IsNullOrEmpty(player.Username))
+        try
         {
-            return RedirectToAction("Error", "Home", new { message = "Name is required." });
+            _playerService.AddPlayer(player);
+            return RedirectToAction();
         }
-        if (_playerRepository.GetPlayerByUsername(player.Username) is not null)
+        catch (ArgumentNullException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = "Player with name already exists." });
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
-
-        _playerRepository.AddPlayer(player);
-        return RedirectToAction();
+        catch (Exception ex)
+        {
+            return RedirectToAction("Error", "Home", new { message = ex.Message });
+        }
     }
 
     public IActionResult AddPlayer()
@@ -38,7 +40,7 @@ public class PlayerController(IPlayerRepository playerRepository) : Controller
     [HttpPost]
     public IActionResult DeletePlayer(int id)
     {
-        _playerRepository.DeletePlayer(id);
+        _playerService.DeletePlayer(id);
         return RedirectToAction("GetPlayers");
     }
 }

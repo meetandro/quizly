@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuizApp.Context;
-using QuizApp.Models;
+using QuizApp.Entities;
 
 namespace QuizApp.Repositories;
 

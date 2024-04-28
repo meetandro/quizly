@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuizApp.Models;
+using QuizApp.Entities;
 
 namespace QuizApp.Context;
 

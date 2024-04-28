@@ -1,4 +1,4 @@
-﻿using QuizApp.Models;
+﻿using QuizApp.Entities;
 
 namespace QuizApp.Repositories;
 

@@ -1,4 +1,5 @@
-﻿using QuizApp.Models;
+﻿using QuizApp.Entities;
+using QuizApp.Models;
 using QuizApp.Repositories;
 
 namespace QuizApp.Services;
@@ -8,11 +9,16 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
     private readonly IPlayerRepository _playerRepository = playerRepository;
     private readonly IQuestionRepository _questionRepository = questionRepository;
 
-    public ResultModel SubmitQuiz(SubmitModel submitModel)
+    public ResultViewModel SubmitQuiz(SubmitViewModel submitViewModel)
     {
-        var player = _playerRepository.GetPlayerByUsername(submitModel.PlayerUsername) ?? throw new ArgumentNullException($"Player {submitModel.PlayerUsername} does not exist");
+        if (string.IsNullOrEmpty(submitViewModel.PlayerUsername))
+        {
+            throw new ArgumentNullException(nameof(submitViewModel), "Username is required.");
+        }
 
-        var answers = _questionRepository.GetAnswersByIds(submitModel.SelectedAnswerIds);
+        var player = _playerRepository.GetPlayerByUsername(submitViewModel.PlayerUsername) ?? throw new Exception($"Player {submitViewModel.PlayerUsername} does not exist");
+
+        var answers = _questionRepository.GetAnswersByIds(submitViewModel.SelectedAnswerIds);
 
         var round = new Round();
 
@@ -40,7 +46,7 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
 
         player = _playerRepository.UpdatePlayer(player);
 
-        var resultModel = new ResultModel
+        var resultModel = new ResultViewModel
         {
             PlayerUsername = player.Username,
             IsWon = round.IsWon,

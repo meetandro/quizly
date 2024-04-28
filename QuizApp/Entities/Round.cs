@@ -1,4 +1,4 @@
-﻿namespace QuizApp.Models;
+﻿namespace QuizApp.Entities;
 
 public class Round
 {
