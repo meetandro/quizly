@@ -6,10 +6,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 text-center">
-            <h2 class="text-danger mb-4">Oops! Something went wrong</h2>
-            <p class="text-muted"><strong>@Model.RequestId</strong></p>
-            <p class="text-muted mb-4">Error Message: <strong>@Model.Message</strong></p>
-            <a href="/" class="btn btn-primary">Home Page</a>
+            <div class="error-container">
+                <h2 class="text-danger mb-4">Oops! Something went wrong</h2>
+                <p class="text-muted"><strong>Error ID:</strong> @Model.RequestId</p>
+                <p class="text-muted mb-4"><strong>Error Message:</strong> @Model.Message</p>
+                <a href="/" class="btn btn-primary">Home Page</a>
+            </div>
         </div>
     </div>
 </div>

@@ -9,9 +9,9 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
 {
     private readonly IQuestionRepository _questionRepository = questionRepository;
 
-    public List<Question> GetQuestions()
+    public List<Question> GetAllQuestions()
     {
-        return _questionRepository.GetQuestions();
+        return _questionRepository.GetAllQuestions();
     }
 
     public Question AddQuestion(QuestionViewModel questionViewModel)

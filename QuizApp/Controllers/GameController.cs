@@ -13,7 +13,8 @@ public class GameController(IGameService gameService, IQuestionService questionS
     [HttpGet]
     public IActionResult StartQuiz()
     {
-        return View(_questionService.GetQuestions());
+        var questions = _questionService.GetAllQuestions();
+        return View("Quiz", questions);
     }
 
     [HttpPost]

@@ -10,9 +10,10 @@ public class QuestionController(IQuestionService questionService) : Controller
     private readonly IQuestionService _questionService = questionService;
 
     [HttpGet]
-    public IActionResult GetQuestions()
+    public IActionResult GetAllQuestions()
     {
-        return View(_questionService.GetQuestions());
+        var questions = _questionService.GetAllQuestions();
+        return View(questions);
     }
 
     public IActionResult AddQuestion()
@@ -46,6 +47,6 @@ public class QuestionController(IQuestionService questionService) : Controller
     public IActionResult DeleteQuestion(int id)
     {
         _questionService.DeleteQuestion(id);
-        return RedirectToAction("GetQuestions");
+        return RedirectToAction("GetAllQuestions");
     }
 }

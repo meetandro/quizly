@@ -3,7 +3,7 @@
 }
 
 <div class="container">
-    <div class="col-md-15">
+    <div class="col-md-8 mx-auto">
         <div class="question-container">
             <h2 class="mb-4">Add Question</h2>
             <form asp-controller="Question" asp-action="AddQuestion" method="post">
@@ -19,7 +19,7 @@
                         <input type="text" name="Question.Answers[@i].AnswerText" class="form-control mb-2" placeholder="Answer @(i+1)" />
                     </div>
                 }
-                <button type="submit" class="btn btn-primary">Add Question</button>
+                <button type="submit" class="btn btn-primary mt-4">Add Question</button>
             </form>
         </div>
     </div>

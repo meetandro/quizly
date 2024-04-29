@@ -10,9 +10,10 @@ public class PlayerController(IPlayerService playerService) : Controller
     private readonly IPlayerService _playerService = playerService;
 
     [HttpGet]
-    public IActionResult GetPlayers()
+    public IActionResult GetAllPlayers()
     {
-        return View(_playerService.GetPlayers());
+        var players = _playerService.GetAllPlayers();
+        return View(players);
     }
 
     public IActionResult AddPlayer()
@@ -46,6 +47,6 @@ public class PlayerController(IPlayerService playerService) : Controller
     public IActionResult DeletePlayer(int id)
     {
         _playerService.DeletePlayer(id);
-        return RedirectToAction("GetPlayers");
+        return RedirectToAction("GetAllPlayers");
     }
 }

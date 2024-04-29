@@ -36,14 +36,16 @@
             <div class="col-md-3 bg-light" style="height: 100vh">
                 <div class="side-menu">
                     <ul class="nav flex-column">
+                        <span class="nav-link text-muted mt-3 mb-2">Questions</span>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="GetQuestions">Questions</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="GetAllQuestions">Questions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="AddQuestion">Add Question</a>
                         </li>
+                        <span class="nav-link text-muted mt-3 mb-2">Players</span>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="GetPlayers">Players</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="GetAllPlayers">Players</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Player" asp-action="AddPlayer">Add Player</a>

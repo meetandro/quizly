@@ -1,21 +1,19 @@
-﻿@{
+﻿@model ResultViewModel
+@{
     ViewData["Title"] = "Result";
 }
-@model ResultViewModel
 
 <div class="container mt-5">
-    <div class="container">
-        <h1>@(Model.PlayerUsername), you got @(Model.CorrectAnswersCount) out of @(Model.QuestionsCount) questions correct (@(Model.Score)%)</h1>
-
+    <div class="jumbotron">
+        <h1 class="display-4">@Model.PlayerUsername, you got @Model.CorrectAnswersCount out of @Model.QuestionsCount questions correct (@Model.Score%)</h1>
         @if (Model.IsWon)
         {
-            <h1>Well done!</h1>
+            <h2 class="display-5">Well done!</h2>
         }
         else
         {
-            <h1>Try again?</h1>
+            <h2 class="display-5">Try again?</h2>
         }
-
         <form asp-controller="Game" asp-action="StartQuiz" method="get">
             <button type="submit" class="btn btn-success">Restart Quiz</button>
         </form>

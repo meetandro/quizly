@@ -8,9 +8,9 @@ public class PlayerService(IPlayerRepository playerRepository) : IPlayerService
 {
     private readonly IPlayerRepository _playerRepository = playerRepository;
 
-    public List<Player> GetPlayers()
+    public List<Player> GetAllPlayers()
     {
-        return _playerRepository.GetPlayers();
+        return _playerRepository.GetAllPlayers();
     }
 
     public Player AddPlayer(Player player)

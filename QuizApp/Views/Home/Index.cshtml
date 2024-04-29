@@ -1,14 +1,13 @@
-﻿@using QuizApp.Entities
+﻿@model List<Question>
 @{
     ViewData["Title"] = "Home Page";
 }
-@model List<Question>
 
 <div class="container mt-5">
-    <div class="container">
-    <h2>Welcome!</h2>
-    <form asp-controller="Game" asp-action="StartQuiz" method="get">
-        <button type="submit" class="btn btn-success">Start Quiz</button>
-    </form>
+    <div class="jumbotron">
+        <h2 class="display-4">Welcome!</h2>
+        <form asp-controller="Game" asp-action="StartQuiz" method="get">
+            <button type="submit" class="btn btn-success">Start Quiz</button>
+        </form>
     </div>
 </div>

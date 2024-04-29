@@ -8,7 +8,7 @@ public class PlayerRepository(QuizAppDbContext context) : IPlayerRepository
 {
     private readonly QuizAppDbContext _context = context;
 
-    public List<Player> GetPlayers()
+    public List<Player> GetAllPlayers()
     {
         return _context.Players
             .ToList();
@@ -45,7 +45,7 @@ public class PlayerRepository(QuizAppDbContext context) : IPlayerRepository
 
     public Player DeletePlayer(int id)
     {
-        var player = _context.Players.FirstOrDefault(p => p.Id == id);
+        var player = GetPlayerById(id);
         _context.Players.Remove(player);
         _context.SaveChanges();
         return player;

@@ -8,7 +8,7 @@ public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
 {
     private readonly QuizAppDbContext _context = context;
 
-    public List<Question> GetQuestions()
+    public List<Question> GetAllQuestions()
     {
         return _context.Questions
             .Include("Answers")
@@ -38,7 +38,7 @@ public class QuestionRepository(QuizAppDbContext context) : IQuestionRepository
 
     public Question DeleteQuestion(int id)
     {
-        var question = _context.Questions.FirstOrDefault(q => q.Id == id);
+        var question = GetQuestionById(id);
         _context.Questions.Remove(question);
         _context.SaveChanges();
         return question;
