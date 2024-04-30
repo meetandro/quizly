@@ -14,20 +14,24 @@ public class QuestionService(IQuestionRepository questionRepository) : IQuestion
         return _questionRepository.GetAllQuestions();
     }
 
-    public Question AddQuestion(QuestionViewModel questionViewModel)
+    public Question AddQuestion(QuestionModel questionModel)
     {
-        var question = questionViewModel.Question ?? throw new EntityNotFoundException("Question does not exist.");
-
-        if (string.IsNullOrEmpty(question.QuestionText))
+        if (string.IsNullOrEmpty(questionModel.QuestionText))
         {
             throw new EmptyInputException("Question text is required.");
         }
-        if (question.Answers.Any(a => string.IsNullOrEmpty(a.AnswerText)))
+        if (questionModel.Answers.Any(a => string.IsNullOrEmpty(a.AnswerText)))
         {
             throw new EmptyInputException("All answers must be filled.");
         }
 
-        int correctAnswerIndex = questionViewModel.CorrectAnswerIndex;
+        var question = new Question
+        {
+            QuestionText = questionModel.QuestionText,
+            Answers = questionModel.Answers,
+        };
+
+        int correctAnswerIndex = questionModel.CorrectAnswerIndex;
         question.Answers[correctAnswerIndex].IsCorrect = true;
 
         return _questionRepository.AddQuestion(question);

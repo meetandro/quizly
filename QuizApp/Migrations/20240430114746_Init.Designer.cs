@@ -11,8 +11,8 @@ using QuizApp.Context;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizAppDbContext))]
-    [Migration("20240415102410_AddRoundModelUpdateAttemptAndPlayer")]
-    partial class AddRoundModelUpdateAttemptAndPlayer
+    [Migration("20240430114746_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace QuizApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            modelBuilder.Entity("QuizApp.Entities.Answer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace QuizApp.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Attempt", b =>
+            modelBuilder.Entity("QuizApp.Entities.Attempt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace QuizApp.Migrations
                     b.ToTable("Attempts");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Player", b =>
+            modelBuilder.Entity("QuizApp.Entities.Player", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,6 @@ namespace QuizApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WinCount")
@@ -97,7 +96,7 @@ namespace QuizApp.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
+            modelBuilder.Entity("QuizApp.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -113,7 +112,7 @@ namespace QuizApp.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Round", b =>
+            modelBuilder.Entity("QuizApp.Entities.Round", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,55 +133,55 @@ namespace QuizApp.Migrations
                     b.ToTable("Rounds");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            modelBuilder.Entity("QuizApp.Entities.Answer", b =>
                 {
-                    b.HasOne("QuizApp.Models.Question", null)
+                    b.HasOne("QuizApp.Entities.Question", null)
                         .WithMany("Answers")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Attempt", b =>
+            modelBuilder.Entity("QuizApp.Entities.Attempt", b =>
                 {
-                    b.HasOne("QuizApp.Models.Answer", null)
+                    b.HasOne("QuizApp.Entities.Answer", null)
                         .WithMany("Attempts")
                         .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuizApp.Models.Round", null)
+                    b.HasOne("QuizApp.Entities.Round", null)
                         .WithMany("Attempts")
                         .HasForeignKey("RoundId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Round", b =>
+            modelBuilder.Entity("QuizApp.Entities.Round", b =>
                 {
-                    b.HasOne("QuizApp.Models.Player", null)
+                    b.HasOne("QuizApp.Entities.Player", null)
                         .WithMany("Rounds")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Answer", b =>
+            modelBuilder.Entity("QuizApp.Entities.Answer", b =>
                 {
                     b.Navigation("Attempts");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Player", b =>
+            modelBuilder.Entity("QuizApp.Entities.Player", b =>
                 {
                     b.Navigation("Rounds");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
+            modelBuilder.Entity("QuizApp.Entities.Question", b =>
                 {
                     b.Navigation("Answers");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Round", b =>
+            modelBuilder.Entity("QuizApp.Entities.Round", b =>
                 {
                     b.Navigation("Attempts");
                 });

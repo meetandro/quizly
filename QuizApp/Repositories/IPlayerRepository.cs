@@ -4,15 +4,15 @@ namespace QuizApp.Repositories;
 
 public interface IPlayerRepository
 {
-    public List<Player> GetAllPlayers();
+    List<Player> GetAllPlayers();
 
-    public Player? GetPlayerById(int id);
+    Player? GetPlayerById(int id);
 
-    public Player? GetPlayerByUsername(string username);
+    Player? GetPlayerByUsername(string username);
 
-    public Player UpdatePlayer(Player player);
+    Player UpdatePlayer(Player player);
 
-    public Player AddPlayer(Player player);
+    Player AddPlayer(Player player);
 
-    public Player DeletePlayer(int id);
+    Player DeletePlayer(int id);
 }

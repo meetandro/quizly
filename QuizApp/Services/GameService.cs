@@ -10,15 +10,15 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
     private readonly IPlayerRepository _playerRepository = playerRepository;
     private readonly IQuestionRepository _questionRepository = questionRepository;
 
-    public ResultViewModel SubmitQuiz(SubmitViewModel submitViewModel)
+    public ResultViewModel SubmitQuiz(SubmitModel submitModel)
     {
-        if (string.IsNullOrEmpty(submitViewModel.PlayerUsername))
+        if (string.IsNullOrEmpty(submitModel.PlayerUsername))
         {
             throw new EmptyInputException("Username is required.");
         }
 
-        var player = _playerRepository.GetPlayerByUsername(submitViewModel.PlayerUsername) ?? throw new EntityNotFoundException($"Player '{submitViewModel.PlayerUsername}' does not exist");
-        var answers = _questionRepository.GetAnswersByIds(submitViewModel.SelectedAnswerIds);
+        var player = _playerRepository.GetPlayerByUsername(submitModel.PlayerUsername) ?? throw new EntityNotFoundException($"Player '{submitModel.PlayerUsername}' does not exist");
+        var answers = _questionRepository.GetAnswersByIds(submitModel.SelectedAnswerIds);
 
         var round = new Round();
         round.Attempts.AddRange(answers.Select(answer => new Attempt

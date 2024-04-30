@@ -4,13 +4,13 @@ namespace QuizApp.Repositories;
 
 public interface IQuestionRepository
 {
-    public List<Question> GetAllQuestions();
+    List<Question> GetAllQuestions();
 
-    public Question? GetQuestionById(int id);
+    Question? GetQuestionById(int id);
 
-    public List<Answer> GetAnswersByIds(List<int> ids);
+    List<Answer> GetAnswersByIds(List<int> ids);
 
-    public Question AddQuestion(Question question);
+    Question AddQuestion(Question question);
 
-    public Question DeleteQuestion(int id);
+    Question DeleteQuestion(int id);
 }

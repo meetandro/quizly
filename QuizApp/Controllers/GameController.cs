@@ -18,11 +18,11 @@ public class GameController(IGameService gameService, IQuestionService questionS
     }
 
     [HttpPost]
-    public IActionResult SubmitQuiz(SubmitViewModel submitViewModel)
+    public IActionResult SubmitQuiz(SubmitModel submitModel)
     {
         try
         {
-            var resultViewModel = _gameService.SubmitQuiz(submitViewModel);
+            var resultViewModel = _gameService.SubmitQuiz(submitModel);
             return View("Result", resultViewModel);
         }
         catch (EmptyInputException ex)

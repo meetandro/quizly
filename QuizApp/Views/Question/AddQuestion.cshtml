@@ -9,14 +9,14 @@
             <form asp-controller="Question" asp-action="AddQuestion" method="post">
                 <div class="form-group">
                     <label for="questionText">Question:</label>
-                    <input type="text" id="questionText" name="Question.QuestionText" class="form-control mb-3" />
+                    <input type="text" id="questionText" name="QuestionText" class="form-control mb-3" />
                 </div>
                 <h3 class="mb-3">Answers</h3>
                 @for (var i = 0; i < 4; i++)
                 {
                     <div class="form-check">
                         <input type="radio" name="CorrectAnswerIndex" class="form-check-input" value="@i" />
-                        <input type="text" name="Question.Answers[@i].AnswerText" class="form-control mb-2" placeholder="Answer @(i+1)" />
+                        <input type="text" name="Answers[@i].AnswerText" class="form-control mb-2" placeholder="Answer @(i+1)" />
                     </div>
                 }
                 <button type="submit" class="btn btn-primary mt-4">Add Question</button>

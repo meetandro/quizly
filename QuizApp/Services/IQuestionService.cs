@@ -5,9 +5,9 @@ namespace QuizApp.Services;
 
 public interface IQuestionService
 {
-    public List<Question> GetAllQuestions();
+    List<Question> GetAllQuestions();
 
-    public Question AddQuestion(QuestionViewModel questionViewModel);
+    Question AddQuestion(QuestionModel questionModel);
 
-    public Question DeleteQuestion(int id);
+    Question DeleteQuestion(int id);
 }

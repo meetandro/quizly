@@ -1,6 +1,6 @@
 ﻿namespace QuizApp.Models;
 
-public class SubmitViewModel
+public class SubmitModel
 {
     public string? PlayerUsername { get; set; }
     public List<int> SelectedAnswerIds { get; set; } = [];

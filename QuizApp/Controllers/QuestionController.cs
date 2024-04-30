@@ -22,16 +22,12 @@ public class QuestionController(IQuestionService questionService) : Controller
     }
 
     [HttpPost]
-    public IActionResult AddQuestion(QuestionViewModel questionViewModel)
+    public IActionResult AddQuestion(QuestionModel questionModel)
     {
         try
         {
-            _questionService.AddQuestion(questionViewModel);
+            _questionService.AddQuestion(questionModel);
             return RedirectToAction();
-        }
-        catch (EntityNotFoundException ex)
-        {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
         }
         catch (EmptyInputException ex)
         {

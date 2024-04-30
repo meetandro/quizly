@@ -4,9 +4,9 @@ namespace QuizApp.Services;
 
 public interface IPlayerService
 {
-    public List<Player> GetAllPlayers();
+    List<Player> GetAllPlayers();
 
-    public Player AddPlayer(Player player);
+    Player AddPlayer(Player player);
 
-    public Player DeletePlayer(int id);
+    Player DeletePlayer(int id);
 }
