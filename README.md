@@ -1,6 +1,6 @@
 # QuizApp
 
-**Quiz application following the MVC (Model-View-Controller) architectural design pattern.**
+**A quiz application following the MVC (Model-View-Controller) architectural design pattern.**
 
 ## Technologies
 
