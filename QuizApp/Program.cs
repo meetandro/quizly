@@ -14,7 +14,7 @@ builder.Services.AddScoped<IQuestionService, QuestionService>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 
 // Register DbContext
-var connectionString = builder.Configuration.GetConnectionString("QuizAppDB");
+var connectionString = builder.Configuration.GetConnectionString("QuizAppDb");
 builder.Services.AddDbContext<QuizAppDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();

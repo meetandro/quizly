@@ -1,13 +1,17 @@
 ﻿@model List<Question>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="container mt-5">
-    <div class="jumbotron">
-        <h2 class="display-4">Welcome!</h2>
-        <form asp-controller="Game" asp-action="StartQuiz" method="get">
-            <button type="submit" class="btn btn-success">Start Quiz</button>
-        </form>
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">To QuizApp.</p>
+            <hr class="my-4">
+            <form asp-controller="Game" asp-action="StartQuiz" method="get">
+                <button type="submit" class="btn btn-lg btn-secondary">Start Quiz</button>
+            </form>
+        </div>
     </div>
 </div>
