@@ -9,29 +9,31 @@
 - ASP.NET Core
 - SQL Server
 
-## Overview
+## Architecture Overview
 
-The MVC design pattern divides the application into three layers: the model, the view and the controller. Each layer has its own responsibility and contributes to the overall functionality of the application, making the solution as modular as possible.
+The MVC design pattern divides the solution into three components: the model, the view and the controller, with each component having its own responsibility and contributing to the overall functionality of the application, making the solution as modular as possible.
 
-* **Model**
+### **Model**
 
-  The model layer consists of repositories and services.
+  The model component is implemeneted via repositories and services.
   
-  Repositories are responsible for data access and manipulation. The context, aka the data, is accessed via the `QuizAppDbContext` class. Repositories stand between the context and the services.
+  Repositories are responsible for data access and manipulation. The context, aka the data, is accessed through the `QuizAppDbContext` class. Repositories stand between the context and the services.
   
-  Services contain business logic and act as a gateway between repositories and controllers. For example, `GameService`, which implements the `IGameService` interface, is responsible for the core game logic. It also handles errors that could potentially occur while playing by utilizing custom exceptions.
+  Services contain business logic and act as a gateway between repositories and controllers. For example, `GameService` is responsible for the core game logic. It also handles errors that could potentially occur while playing by utilizing custom exceptions.
 
-  In the current solution, the model layer consists of two repositories, one for questions (`QuestionRepository`) and the other one for players (`PlayrRepository`), alongside with three services: `GameService`, `QuestionService` and `PlayerService`. Each of these components implement an interface which helps create more loose and maintainable code.
+  In this solution, the model component consists of two repositories, one for questions (`QuestionRepository`) and the other one for players (`PlayerRepository`), alongside with three services: `GameService`, `QuestionService` and `PlayerService`. Each of these elements implement an interface, consequently supporting loose coupling and resulting in maintainable code.
 
-* **View**
+### **View**
   
-  The view layer is whats actually presented to the client, in other words, the user interface, but is also responsible for sending data submitted by the user to controllers. Views receive view models, which play a fundamental role in displaying the necessary data.
+  The view component is whats actually presented to the client, in other words, the user interface, but is also responsible for sending data submitted by the user to controllers. Views receive view models, which play a fundamental role in displaying all the necessary data.
 
-  In this solution, the layer consists of pages for the home, the game, the questions and the players.
+  In the current solution, the view component consists of pages for the home (home page and privacy policy), the game (quiz and results), the questions (adding and displaying the questions) and the players (adding and displaying the players), while also being responsible for displaying the general layout and visualizing errors.
   
-* **Controller**
+### **Controller**
   
-  Lastly, the controller layer is responsible for handling HTTP requests sent from the view, utilizing services to perform specific actions while also providing the view with view models. This layer acts as a middleman between the model and the view.
+  Lastly, the controller component is responsible for handling HTTP requests sent from the view, utilizing services to perform specific actions and catching exceptions, while also providing the view with view models. This layer acts as a middleman between the model and the view.
+
+  This solution utilizes a total of four controllers, `HomeController` being responsible for the home page and occured errors, `GameController` displaying the actual quiz, `QuestionController` managing the questions and `PlayerController` managing the players.
   
 ## Database Schema
 
