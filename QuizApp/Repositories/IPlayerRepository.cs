@@ -10,9 +10,9 @@ public interface IPlayerRepository
 
     Player? GetPlayerByUsername(string username);
 
-    Player UpdatePlayer(Player player);
-
     Player AddPlayer(Player player);
+
+    Player UpdatePlayer(Player player);
 
     Player DeletePlayer(int id);
 }

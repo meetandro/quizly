@@ -28,19 +28,19 @@ public class PlayerRepository(QuizAppDbContext context) : IPlayerRepository
             .FirstOrDefault(p => p.Username == username);
     }
 
+    public Player AddPlayer(Player player)
+    {
+        _context.Players.Add(player);
+        _context.SaveChanges();
+        return player;
+    }
+
     public Player UpdatePlayer(Player player)
     {
         _context.Players.Update(player);
         _context.SaveChanges();
         var updatedPlayer = GetPlayerById(player.Id);
         return updatedPlayer;
-    }
-
-    public Player AddPlayer(Player player)
-    {
-        _context.Players.Add(player);
-        _context.SaveChanges();
-        return player;
     }
 
     public Player DeletePlayer(int id)
