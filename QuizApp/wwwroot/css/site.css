@@ -14,5 +14,41 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    color: #fff;
+    background: linear-gradient(45deg, #3f3f3f, #252525);
+}
+
+.card-custom-dark {
+    padding: 1.5rem;
+    border: 3px solid transparent;
+    border-image: linear-gradient(45deg, #ff5c6b, #5c79ff) 1;
+    background-color: #333;
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 15px;
+}
+
+.btn-custom-dark {
+    background: #333;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-custom-dark:hover {
+    box-shadow: 0 1px 15px rgba(80, 63, 205, 0.5);
+    background: #34314B;
+    color: #fff;
+}
+
+.input-custom-dark {
+    background-color: #2f2f2f;
+    border-color: #fff;
+}
+
+.input-custom-dark:focus {
+    background-color: #2f2f2f;
 }

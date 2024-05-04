@@ -3,15 +3,15 @@
     ViewData["Title"] = "Error";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
-            <div class="error-container">
-                <h2 class="text-danger mb-4">Oops! Something went wrong</h2>
-                <p class="text-muted"><strong>Error ID:</strong> @Model.RequestId</p>
-                <p class="text-muted mb-4"><strong>Error Message:</strong> @Model.Message</p>
-                <a href="/" class="btn btn-primary">Home Page</a>
-            </div>
+<div class="container mt-5">
+    <div class="card card-custom-dark">
+        <div class="card-body text-center">
+            <h2 class="text-danger mb-4">An error occured</h2>
+            <p class="text-muted"><strong>Error ID:</strong> @Model.RequestId</p>
+            <p class="text-muted"><strong>Error Message:</strong> @Model.Message</p>
+            <form asp-controller="Home" asp-action="Index" method="get">
+                <button type="submit" class="btn-custom-dark mt-3">Home Page</button>
+            </form>
         </div>
     </div>
 </div>

@@ -4,18 +4,13 @@
 }
 
 <div class="container mt-5">
-    <div class="jumbotron">
-        <h1 class="display-4">@Model.PlayerUsername, you got @Model.CorrectAnswersCount out of @Model.QuestionsCount questions correct (@Model.Score%)</h1>
-        @if (Model.IsWon)
-        {
-            <h2 class="display-5">Well done!</h2>
-        }
-        else
-        {
-            <h2 class="display-5">Try again?</h2>
-        }
-        <form asp-controller="Game" asp-action="StartQuiz" method="get">
-            <button type="submit" class="btn btn-success">Restart Quiz</button>
-        </form>
+    <div class="card card-custom-dark">
+        <div class="card-body text-center">
+            <h2 class="mb-4">Quiz Results</h2>
+            <h4 class="mb-4">Total score: @Model.Score% (@Model.CorrectAnswersCount/@Model.QuestionsCount)</h4>
+            <form asp-controller="Game" asp-action="StartQuiz" method="get">
+                <button type="submit" class="btn-custom-dark">Restart Quiz</button>
+            </form>
+        </div>
     </div>
 </div>

@@ -27,15 +27,20 @@ public class GameController(IGameService gameService, IQuestionService questionS
         }
         catch (EmptyInputException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
         catch (EntityNotFoundException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
         catch (Exception ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
+    }
+
+    private RedirectToActionResult ViewError(string message)
+    {
+        return RedirectToAction("Error", "Home", new { message });
     }
 }

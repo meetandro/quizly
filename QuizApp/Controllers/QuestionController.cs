@@ -13,7 +13,7 @@ public class QuestionController(IQuestionService questionService) : Controller
     public IActionResult GetAllQuestions()
     {
         var questions = _questionService.GetAllQuestions();
-        return View(questions);
+        return View("Questions", questions);
     }
 
     public IActionResult AddQuestion()
@@ -31,12 +31,17 @@ public class QuestionController(IQuestionService questionService) : Controller
         }
         catch (EmptyInputException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
         catch (Exception ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
+    }
+
+    private RedirectToActionResult ViewError(string message)
+    {
+        return RedirectToAction("Error", "Home", new { message });
     }
 
     [HttpPost]

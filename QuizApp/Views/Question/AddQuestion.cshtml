@@ -2,25 +2,26 @@
     ViewData["Title"] = "Add Question";
 }
 
-<div class="container">
-    <div class="col-md-8 mx-auto">
-        <div class="question-container">
-            <h2 class="mb-4">Add Question</h2>
-            <form asp-controller="Question" asp-action="AddQuestion" method="post">
-                <div class="form-group">
-                    <label for="questionText">Question:</label>
-                    <input type="text" id="questionText" name="QuestionText" class="form-control mb-3" />
-                </div>
-                <h3 class="mb-3">Answers</h3>
-                @for (var i = 0; i < 4; i++)
-                {
-                    <div class="form-check">
-                        <input type="radio" name="CorrectAnswerIndex" class="form-check-input" value="@i" />
-                        <input type="text" name="Answers[@i].AnswerText" class="form-control mb-2" placeholder="Answer @(i+1)" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-custom-dark text-center">
+                <h2>Add Question</h2>
+                <form asp-controller="Question" asp-action="AddQuestion" method="post">
+                    <div class="form-group mt-3">
+                        <input type="text" name="QuestionText" placeholder="Question Text" class="input-custom-dark form-control text-light mb-3">
                     </div>
-                }
-                <button type="submit" class="btn btn-primary mt-4">Add Question</button>
-            </form>
+                    <h3>Answers</h3>
+                    @for (var i = 0; i < 4; i++)
+                    {
+                        <div class="form-check mt-3 mb-3">
+                            <input type="radio" name="CorrectAnswerIndex" class="input-custom-dark form-check-input mt-2" value="@i">
+                            <input type="text" name="Answers[@i].AnswerText" class="input-custom-dark form-control text-light" placeholder="Answer @(i+1)">
+                        </div>
+                    }
+                    <button type="submit" class="btn-custom-dark">Add Question</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

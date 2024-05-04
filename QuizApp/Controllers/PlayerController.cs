@@ -13,7 +13,7 @@ public class PlayerController(IPlayerService playerService) : Controller
     public IActionResult GetAllPlayers()
     {
         var players = _playerService.GetAllPlayers();
-        return View(players);
+        return View("Players", players);
     }
 
     public IActionResult AddPlayer()
@@ -31,16 +31,21 @@ public class PlayerController(IPlayerService playerService) : Controller
         }
         catch (EmptyInputException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
         catch (EntityAlreadyExistsException ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
         catch (Exception ex)
         {
-            return RedirectToAction("Error", "Home", new { message = ex.Message });
+            return ViewError(ex.Message);
         }
+    }
+
+    private RedirectToActionResult ViewError(string message)
+    {
+        return RedirectToAction("Error", "Home", new { message });
     }
 
     [HttpPost]

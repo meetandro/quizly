@@ -1,0 +1,42 @@
+﻿@model List<Player>
+@{
+    ViewData["Title"] = "Players";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card card-custom-dark">
+        <div class="card-body">
+            <h2 class="text-center">Players</h2>
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Win Count</th>
+                            <th>High Score</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var player in Model)
+                        {
+                            <tr>
+                                <td>@(Model.IndexOf(player) + 1)</td>
+                                <td>@player.Username</td>
+                                <td>@player.WinCount</td>
+                                <td>@player.HighScore</td>
+                                <td>
+                                    <form asp-controller="Player" asp-action="DeletePlayer" method="post">
+                                        <input type="hidden" name="id" value="@player.Id">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

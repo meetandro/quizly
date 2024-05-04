@@ -2,17 +2,18 @@
     ViewData["Title"] = "Add Player";
 }
 
-<div class="container">
-    <div class="col-md-6 mx-auto">
-        <div class="player-container">
-            <h2 class="mb-4">Add Player</h2>
-            <form asp-controller="Player" asp-action="AddPlayer" method="post">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="Username" class="form-control mb-3" />
-                </div>
-                <button type="submit" class="btn btn-primary">Add Player</button>
-            </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-custom-dark text-center">
+                <h2>Add Player</h2>
+                <form asp-controller="Player" asp-action="AddPlayer" method="post">
+                    <div class="form-group mt-3">
+                        <input type="text" name="Username" placeholder="Username" class="input-custom-dark form-control text-light mb-3">
+                    </div>
+                    <button type="submit" class="btn-custom-dark">Add Player</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

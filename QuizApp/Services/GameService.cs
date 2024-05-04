@@ -31,7 +31,7 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
         int questionsCount = _questionRepository.GetAllQuestions().Count;
 
         int score = questionsCount == 0 ? 0 : correctAnswersCount * 100 / questionsCount;
-        if (score >= 75)
+        if (score >= 50)
         {
             round.IsWon = true;
             player.WinCount++;
@@ -43,8 +43,6 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
 
         var resultViewModel = new ResultViewModel
         {
-            PlayerUsername = player.Username,
-            IsWon = round.IsWon,
             QuestionsCount = questionsCount,
             CorrectAnswersCount = correctAnswersCount,
             Score = score
