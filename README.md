@@ -31,7 +31,7 @@ The MVC design pattern divides the solution into three components: the model, th
   
 ### **Controller**
   
-  Lastly, the controller component is responsible for handling HTTP requests sent from the view, utilizing services to perform specific actions and catching exceptions, while also providing the view with view models. This component acts as a middleman between the model and the view.
+  Lastly, the controller component is responsible for handling HTTP requests sent from the view, utilizing services to perform specific actions and catch exceptions, while also providing the view with view models. This component acts as a middleman between the model and the view.
 
   This solution utilizes a total of four controllers, `HomeController` being responsible for the home page and errors occurred, `GameController` displaying the actual quiz, `QuestionController` managing the questions and `PlayerController` managing the players.
   
@@ -77,14 +77,6 @@ To run the application locally, you'll need to have the [.NET SDK](https://dotne
   
   ```sql server
   SELECT @@SERVERNAME;
-  ```
-  
-  The server name may vary depending on the instance of your SQL Server. For example, if you're using the express version, you'll need to input the following:
-  
-  ```json
-  "ConnectionStrings": {
-    "QuizAppDb": "Server=localhost\\SQLEXPRESS;Database=QuizApp;Trusted_Connection=True;TrustServerCertificate=True"
-  },
   ```
 
 * **Finally, you can run the application locally on `localhost:7279`:**
