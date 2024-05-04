@@ -43,7 +43,7 @@ The MVC design pattern divides the solution into three components: the model, th
 
 | Home | Quiz | Result | Error |
 |------|------|--------|-------|
-| ![Home](https://github.com/meetandro/QuizApp/assets/132354578/d024230a-7db0-4a07-a9af-4de28de592c8) | ![Quiz](https://github.com/meetandro/QuizApp/assets/132354578/1db9ff5d-d228-4666-af83-7438f9065b0f) | ![Result](https://github.com/meetandro/QuizApp/assets/132354578/8a772f27-1f6d-43d6-a02b-3c3f5905049f) | ![Error](https://github.com/meetandro/QuizApp/assets/132354578/9ad5c4aa-77c4-46fe-a8d0-4f23c42a5475) |
+| ![Home](https://github.com/meetandro/QuizApp/assets/132354578/3c88b355-2acd-4995-9154-cf8c878feca9) | ![Quiz](https://github.com/meetandro/QuizApp/assets/132354578/0339b3d9-6d71-4c9e-8c0e-a893474a8c16) | ![Result](https://github.com/meetandro/QuizApp/assets/132354578/8a772f27-1f6d-43d6-a02b-3c3f5905049f) | ![Error](https://github.com/meetandro/QuizApp/assets/132354578/9ad5c4aa-77c4-46fe-a8d0-4f23c42a5475) |
 
 | Questions | Add Question | Players | Add Player |
 |-----------|--------------|---------|------------|
