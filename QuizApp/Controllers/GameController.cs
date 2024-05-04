@@ -25,22 +25,14 @@ public class GameController(IGameService gameService, IQuestionService questionS
             var resultViewModel = _gameService.SubmitQuiz(submitModel);
             return View("Result", resultViewModel);
         }
-        catch (EmptyInputException ex)
-        {
-            return ViewError(ex.Message);
-        }
-        catch (EntityNotFoundException ex)
-        {
-            return ViewError(ex.Message);
-        }
         catch (Exception ex)
         {
-            return ViewError(ex.Message);
+            return ex switch
+            {
+                EmptyInputException => RedirectToAction("Error", "Home", new { message = ex.Message }),
+                EntityNotFoundException => RedirectToAction("Error", "Home", new { message = ex.Message }),
+                _ => RedirectToAction("Error", "Home", new { message = ex.Message })
+            };
         }
-    }
-
-    private RedirectToActionResult ViewError(string message)
-    {
-        return RedirectToAction("Error", "Home", new { message });
     }
 }

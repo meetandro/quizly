@@ -29,19 +29,14 @@ public class QuestionController(IQuestionService questionService) : Controller
             _questionService.AddQuestion(questionModel);
             return RedirectToAction();
         }
-        catch (EmptyInputException ex)
-        {
-            return ViewError(ex.Message);
-        }
         catch (Exception ex)
         {
-            return ViewError(ex.Message);
+            return ex switch
+            {
+                EmptyInputException => RedirectToAction("Error", "Home", new { message = ex.Message }),
+                _ => RedirectToAction("Error", "Home", new { message = ex.Message })
+            };
         }
-    }
-
-    private RedirectToActionResult ViewError(string message)
-    {
-        return RedirectToAction("Error", "Home", new { message });
     }
 
     [HttpPost]
