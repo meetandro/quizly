@@ -18,6 +18,10 @@ body {
     background: linear-gradient(45deg, #3f3f3f, #252525);
 }
 
+.bg-custom-dark {
+    background: #282828;
+}
+
 .border-custom {
     border-radius: 8px !important; 
 }
