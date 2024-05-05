@@ -18,6 +18,10 @@ body {
     background: linear-gradient(45deg, #3f3f3f, #252525);
 }
 
+.border-custom {
+    border-radius: 8px !important; 
+}
+
 .card-custom-dark {
     padding: 1.5rem;
     border: 3px solid transparent;
