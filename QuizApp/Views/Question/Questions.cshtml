@@ -22,9 +22,7 @@
                         {
                             <tr>
                                 <td>@(Model.IndexOf(question) + 1)</td>
-                                <td>
-                                    <p>@question.QuestionText</p>
-                                </td>
+                                <td>@question.QuestionText</td>
                                 <td>
                                     @foreach (var answer in question.Answers)
                                     {

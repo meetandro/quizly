@@ -27,8 +27,8 @@ public class GameService(IPlayerRepository playerRepository, IQuestionRepository
             AnswerId = answer.Id
         }));
 
-        int correctAnswersCount = answers.Count(answer => answer.IsCorrect);
         int questionsCount = _questionRepository.GetAllQuestions().Count;
+        int correctAnswersCount = answers.Count(answer => answer.IsCorrect);
 
         int score = questionsCount == 0 ? 0 : correctAnswersCount * 100 / questionsCount;
         if (score >= 50)
