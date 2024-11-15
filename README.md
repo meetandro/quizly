@@ -1,4 +1,4 @@
-# QuizApp
+# Quizly
 
 **A quiz application implementing the MVC (Model-View-Controller) architectural design pattern.**
 
@@ -17,7 +17,7 @@ The MVC design pattern divides the solution into three components: the model, th
 
   The model component is implemeneted via repositories and services.
   
-  Repositories are responsible for data access and manipulation. The context, aka the data, is accessed through the `QuizAppDbContext` class. Repositories stand between the context and the services.
+  Repositories are responsible for data access and manipulation. The context, aka the data, is accessed through the `QuizlyDbContext` class. Repositories stand between the context and the services.
   
   Services contain business logic and act as a gateway between repositories and controllers. For example, `GameService` is responsible for the core game logic. It also handles errors that could potentially occur while running the application by utilizing custom exceptions.
 
@@ -43,7 +43,7 @@ The MVC design pattern divides the solution into three components: the model, th
 
 | Home | Quiz | Result | Error |
 |------|------|--------|-------|
-| ![Home](https://github.com/meetandro/QuizApp/assets/132354578/224954e4-5f7d-4753-be9e-b6048b2df3d7) | ![Quiz](https://github.com/meetandro/QuizApp/assets/132354578/0339b3d9-6d71-4c9e-8c0e-a893474a8c16) | ![Result](https://github.com/meetandro/QuizApp/assets/132354578/8a772f27-1f6d-43d6-a02b-3c3f5905049f) | ![Error](https://github.com/meetandro/QuizApp/assets/132354578/9ad5c4aa-77c4-46fe-a8d0-4f23c42a5475) |
+| ![Home](https://github.com/user-attachments/assets/f46feb84-e7e2-43b5-bf04-7f2706e2c8b0) | ![Quiz](https://github.com/meetandro/QuizApp/assets/132354578/0339b3d9-6d71-4c9e-8c0e-a893474a8c16) | ![Result](https://github.com/meetandro/QuizApp/assets/132354578/8a772f27-1f6d-43d6-a02b-3c3f5905049f) | ![Error](https://github.com/meetandro/QuizApp/assets/132354578/9ad5c4aa-77c4-46fe-a8d0-4f23c42a5475) |
 
 | Questions | Add Question | Players | Add Player |
 |-----------|--------------|---------|------------|
@@ -51,25 +51,25 @@ The MVC design pattern divides the solution into three components: the model, th
 
 ## Installation
 
-To run the application locally, you'll need to have the [.NET SDK](https://dotnet.microsoft.com/en-us/download) and [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) installed beforehand, along with a database named `QuizApp`.
+To run the application locally, you'll need to have the [.NET SDK](https://dotnet.microsoft.com/en-us/download) and [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) installed beforehand, along with a database named `Quizly`.
 
-* **Start by cloning the repository:**
+- **Start by cloning the repository:**
 
   ```bash
-  $ git clone https://github.com/meetandro/QuizApp.git
+  git clone https://github.com/meetandro/Quizly.git
   ```
   
   ```bash
-  $ cd QuizApp
+  cd Quizly
   ```
 
   Alternatively, you can download the repository as a ZIP file and extract it.
 
-* **Next, modify the server name in `appsettings.json`:**
+- **Next, modify the server name in `appsettings.json`:**
 
   ```json
   "ConnectionStrings": {
-    "QuizAppDb": "Server=localhost;Database=QuizApp;Trusted_Connection=True;TrustServerCertificate=True"
+    "QuizlyDb": "Server=localhost;Database=Quizly;Trusted_Connection=True;TrustServerCertificate=True"
   },
   ```
   
@@ -79,8 +79,8 @@ To run the application locally, you'll need to have the [.NET SDK](https://dotne
   SELECT @@SERVERNAME;
   ```
 
-* **Finally, you can run the application locally on `localhost:7279`:**
+- **Finally, you can run the application locally on `localhost:7279`:**
 
   ```bash
-  $ dotnet run
+  dotnet run
   ```
