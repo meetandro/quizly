@@ -1,6 +1,6 @@
 # Quizly
 
-**A quiz application implementing the MVC (Model-View-Controller) architectural design pattern.**
+**Quiz application implementing the MVC (Model-View-Controller) architectural design pattern.**
 
 ## Technologies
 
